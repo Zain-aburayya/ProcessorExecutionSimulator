@@ -6,7 +6,7 @@ import components.Task;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Report implements ISummary , IReport{
+public class Print implements ISummary , IReport{
     private String line;
     private final List<String> lines = new ArrayList<>();
     private final Clock clock = Clock.getInstance();
