@@ -1,5 +1,7 @@
 package components;
 import components.comparator.ByPriority;
+import printer.Report;
+
 import java.util.PriorityQueue;
 public class Schedule {
     PriorityQueue<Task> priorityQueue = new PriorityQueue<>(new ByPriority());

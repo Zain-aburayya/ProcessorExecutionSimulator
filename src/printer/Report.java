@@ -1,8 +1,12 @@
-package components;
+package printer;
+import components.Clock;
+import components.Processor;
+import components.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Report {
+public class Report implements ISummary , IReport{
     private String line;
     private final List<String> lines = new ArrayList<>();
     private final Clock clock = Clock.getInstance();
@@ -37,7 +41,7 @@ public class Report {
         System.out.println(line + "\n");
     }
 
-    public void printReport(){
+    public void printSummary(){
         System.out.println("\t============== At the end  ==============");
         String cyan = "\u001B[36m";
         System.out.println(cyan + "-This is a clear and concise summary of the simulation" +

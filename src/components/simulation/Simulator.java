@@ -52,7 +52,7 @@ public class Simulator {
             schedule.scheduleTask();
             clock.tick();
         }
-        schedule.getReport().printReport();
+        schedule.getReport().printSummary();
     }
 
     public void findPriorityTasks(){
