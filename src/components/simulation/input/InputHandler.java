@@ -1,11 +1,20 @@
-package components.simulation;
+package components.simulation.input;
 import components.Task;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
 public class InputHandler {
+    public int getClockCycle() {
+        return clockCycle;
+    }
+
     int clockCycle;
+
+    public int getNumOfProcessors() {
+        return numOfProcessors;
+    }
+
     int numOfProcessors;
     Scanner input = new Scanner(System.in);
     private static InputHandler instance = null;
@@ -35,7 +44,19 @@ public class InputHandler {
             int creationTime = input.nextInt();
             int executionTime = input.nextInt();
             int priority = input.nextInt();
-            taskList.add(new Task(id , creationTime , executionTime , priority));
+            Validator validator_1 = new CreationValidator();
+            Validator validator_2 = new ExecutionValidator();
+            Validator validator_3 = new PriorityValidator();
+            Validator validator_4 = new DoneValidation();
+            validator_1.setNextCheck(validator_2);
+            validator_2.setNextCheck(validator_3);
+            validator_3.setNextCheck(validator_4);
+            if(validator_1.Check(creationTime,executionTime,priority)){
+                taskList.add(new Task(id , creationTime , executionTime , priority));
+            }
+            else{
+                throw new Error("There is an error with your input..");
+            }
         }
         return taskList;
     }

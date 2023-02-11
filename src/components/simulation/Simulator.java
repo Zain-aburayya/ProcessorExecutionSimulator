@@ -3,6 +3,7 @@ package components.simulation;
 import components.*;
 import components.comparator.ByCreation;
 import components.comparator.ByPriority;
+import components.simulation.input.InputHandler;
 
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -24,15 +25,15 @@ public class Simulator {
 
     public void intiProcessor(){
         input.collectProcessorInput();
-        processors = new Processor[input.numOfProcessors];
-        for(int i = 1; i <= input.numOfProcessors ; i++){
+        processors = new Processor[input.getNumOfProcessors()];
+        for(int i = 1; i <= input.getNumOfProcessors(); i++){
             processors[i-1] = new Processor(i);
         }
     }
     public void intiClock(){
         clock = Clock.getInstance();
         input.collectClockInput();
-        clock.setAllDuration(input.clockCycle);
+        clock.setAllDuration(input.getClockCycle());
     }
     public void intiTask() throws FileNotFoundException {
         List<Task> taskList = input.collectTaskInput();
@@ -52,7 +53,7 @@ public class Simulator {
             schedule.scheduleTask();
             clock.tick();
         }
-        schedule.getReport().printSummary();
+        schedule.getPrint().printSummary();
     }
 
     public void findPriorityTasks(){

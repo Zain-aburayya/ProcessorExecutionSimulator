@@ -6,12 +6,12 @@ import java.util.PriorityQueue;
 public class Schedule {
     PriorityQueue<Task> priorityQueue = new PriorityQueue<>(new ByPriority());
     Processor []processors;
-    Print report;
-    public Print getReport() {
-        return report;
+    Print print;
+    public Print getPrint() {
+        return print;
     }
     public Schedule(){
-        report = new Print();
+        print = new Print();
     }
 
     public void setPriorityQueue(PriorityQueue<Task> priorityQueue) {
@@ -26,7 +26,7 @@ public class Schedule {
         Task task = priorityQueue.poll();
         assert task != null;
         p.assignTask(task);
-        report.assigningReport(p , task);
+        print.assigningReport(p , task);
     }
 
     public void scheduleTask(){
@@ -34,9 +34,9 @@ public class Schedule {
             for(Processor p : processors) {
                 p.decreaseRemSec();
                 if(p.isOver())
-                    report.finishingReport(p);
+                    print.finishingReport(p);
             }
-            report.nothingToReport();
+            print.nothingToReport();
             return;
         }
         boolean assign = true;
@@ -49,12 +49,12 @@ public class Schedule {
                     assigning(p);
             }
             else if(p.isOver()){
-                report.finishingReport(p);
+                print.finishingReport(p);
                 if(assign)
                     assigning(p);
             }
             else{
-                report.waitingReport(p);
+                print.waitingReport(p);
             }
         }
         System.out.println();
