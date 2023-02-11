@@ -9,7 +9,6 @@ import java.util.List;
 public class Print implements ISummary , IReport{
     protected static final List<String> lines = new ArrayList<>();
     protected static final Clock clock = Clock.getInstance();
-
     protected static final String RESET = "\u001B[0m";
 
     public void nothingToReport(){
